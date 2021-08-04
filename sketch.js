@@ -1,27 +1,26 @@
-var fixedRect,movingRect;
-function setup() {
-  createCanvas(800,400);
-  fixedRect= createSprite(200, 200, 50, 80);
-  movingRect= createSprite(400, 200, 80, 30);
-fixedRect.debug=true;
-movingRect.debug=true;
+var sea,ship,shipImage,seaImage
+
+function preload(){
+seaImage=loadImage("sea.png")
+shipImage=loadAnimation("ship-1.png","ship-2.png","ship-3.png","ship-4.png")
+
+}
+
+function setup(){
+
+  createCanvas(600,600);
+  sea=createSprite(0,0,600,600)
+  ship=createSprite(130,200,30,30)
+  ship.addAnimation("ship",shipImage)
+  ship.scale=0.5
+sea.addImage("sea",seaImage)
 }
 
 function draw() {
-  background("lightblue");  
-  movingRect.x=World.mouseX;
-  movingRect.y=World.mouseY;
-if(movingRect.x-fixedRect.x<fixedRect.width/2+movingRect.width/2 
-  && fixedRect.x - movingRect.x < fixedRect.width/2 + movingRect.width/2 
-  && movingRect.y - fixedRect.y < fixedRect.height/2 + movingRect.height/2 
-  && fixedRect.y - movingRect.y < fixedRect.height/2 + movingRect.height/2)
-  {movingRect.shapeColor="red";
-  fixedRect.shapeColor="red";
-
-}
-else{movingRect.shapeColor="green";
-fixedRect.shapeColor="green";
-
-}
-  drawSprites();
+  background("lightblue");
+ sea.velocityX=-1
+ if(sea.x<0){
+   sea.x=sea.width/2;
+ }
+ drawSprites()
 }
